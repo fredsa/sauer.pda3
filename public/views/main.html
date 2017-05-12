@@ -1,0 +1,50 @@
+<md-content flex>
+
+  <div layout="row" flex>
+    <md-input-container class="search">
+      <label>Search</label>
+      <input type="text" ng-model="search" autofocus>
+    </md-input-container>
+  </div>
+
+  <div layout="row" layout-xs="column">
+    <md-card ng-repeat="card in cards" class="card" layout="column" flex-xs flex-gt-xs="50">
+
+      <md-card-title>
+        <md-card-title-text my-display-name="card">
+        </md-card-title-text>
+      </md-card-title>
+
+      <md-card-content>
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>First Name</label>
+            <input type="text" ng-model="card.firstName" ng-change="updateDisplayName(card)">
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>Last Name</label>
+            <input type="text" ng-model="card.lastName" ng-change="updateDisplayName(card)">
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>Entity Name</label>
+            <input type="text" ng-model="card.entityName" ng-change="updateDisplayName(card)">
+          </md-input-container>
+        </div>
+
+        <md-input-container class="md-block">
+          <label>Notes</label>
+          <textarea ng-model="card.notes" class="notes"></textarea>
+        </md-input-container>
+
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button type="submit" class="md-primary md-raised" ng-click="save(card)">Save</md-button>
+        </md-card-actions>
+
+      </md-card-content>
+
+    </md-card>
+  <div>
+
+</md-content>
