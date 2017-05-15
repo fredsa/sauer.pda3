@@ -1,0 +1,38 @@
+<md-card class="card">
+
+    <!-- Card title -->
+    <md-card-title layout="row" ng-class="{'disabled': !card.enabled || !contact.enabled}">
+
+        <md-checkbox ng-disabled="!card.enabled" ng-model="contact.enabled" aria-label="Enabled"></md-checkbox>
+        <md-card-title-text>Contact</md-card-title-text>
+        <md-button ng-disabled="!card.enabled || !contact.enabled" class="md-icon-button" ng-click="delete($event, card, contact)"
+            aria-label="Delete">
+            <md-icon md-svg-icon="/icons/ic_delete_24px.svg"></md-icon>
+        </md-button>
+
+    </md-card-title>
+
+
+    <md-card-content>
+
+        <!-- Main fields -->
+        <md-input-container class="md-block">
+            <label>Contact method</label>
+            <input ng-disabled="!card.enabled || !contact.enabled" type="text" ng-model="contact.contact_method">
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label>Contact Text</label>
+            <input ng-disabled="!card.enabled || !contact.enabled" type="text" ng-model="contact.contact_text">
+        </md-input-container>
+
+
+        <!-- Notes -->
+        <md-input-container class="md-block">
+            <label>Notes</label>
+            <input ng-disabled="!card.enabled || !contact.enabled" type="text" ng-model="contact.notes">
+        </md-input-container>
+
+    </md-card-content>
+
+</md-card>

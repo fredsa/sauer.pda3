@@ -42,3 +42,7 @@ button.md-button md-icon{
     /* Fix icon alignment. */
     margin-top: -2px;
 }
+
+md-card-title.disabled {
+    color: rgba(0,0,0,0.38);
+}

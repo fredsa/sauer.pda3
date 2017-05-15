@@ -1,5 +1,6 @@
 <md-content flex>
 
+  <!-- Search bar -->
   <div layout="row" flex>
     <md-input-container class="search">
       <label>Search</label>
@@ -7,109 +8,16 @@
     </md-input-container>
   </div>
 
+  <!-- Button bar -->
   <div layout="row" flex>
     <md-button class="md-mini md-raised" ng-click="newEntity()">New Entity</md-button>
   </div>
 
-
+  <!-- Search results -->
   <div layout="row" layout-wrap>
-    <md-card ng-repeat="card in cards" flex="100" flex-gt-md="75">
-
-      <md-card-title layout="row">
-        <div layout-gt-xs="row">
-          <md-checkbox ng-model="card.enabled" aria-label="Enabled">
-          </md-checkbox>
-        </div>
-        <md-card-title-text my-display-name="card" layout="row">
-        </md-card-title-text>
-        <md-button class="md-icon-button" ng-click="delete($event, card)" aria-label="Delete">
-          <md-icon md-svg-icon="/icons/ic_delete_24px.svg"></md-icon>
-        </md-button>
-      </md-card-title>
-
-      <md-card-content>
-
-        <div layout-gt-xs="row">
-          <md-input-container class="md-block" flex-gt-xs>
-            <label>First Name</label>
-            <input type="text" ng-model="card.first_name">
-          </md-input-container>
-
-          <md-input-container class="md-block" flex-gt-xs>
-            <label>Last Name</label>
-            <input type="text" ng-model="card.last_name">
-          </md-input-container>
-
-          <md-input-container class="md-block" flex-gt-xs>
-            <label>Entity Name</label>
-            <input type="text" ng-model="card.entity_name">
-          </md-input-container>
-        </div>
-
-        <md-input-container class="md-block">
-          <label>Notes</label>
-          <textarea ng-model="card.notes" class="notes"></textarea>
-        </md-input-container>
-
-
-        <md-card-actions layout="row" layout-align="start center">
-          <md-button class="md-mini md-primary" ng-click="newContact(card)">
-            <md-icon md-svg-icon="/icons/ic_add_box_24px.svg"></md-icon>
-            Contact
-          </md-button>
-          <md-button class="md-mini md-primary" ng-click="newAddress(card)">
-            <md-icon md-svg-icon="/icons/ic_add_box_24px.svg"></md-icon>
-            Address
-          </md-button>
-          <md-button class="md-mini md-primary" ng-click="newCalendar(card)">
-            <md-icon md-svg-icon="/icons/ic_add_box_24px.svg"></md-icon>
-            Calendar
-          </md-button>
-        </md-card-actions>
-
-
-        <md-card ng-repeat="contact in card.contacts" class="card" >
-
-          <md-card-title layout="row">
-            <md-checkbox ng-model="card.enabled" aria-label="Enabled"></md-checkbox>
-            <md-card-title-text>Contact</md-card-title-text>
-            <md-button class="md-icon-button" ng-click="delete($event, card, contact)" aria-label="Delete">
-              <md-icon md-svg-icon="/icons/ic_delete_24px.svg"></md-icon>
-            </md-button>
-          </md-card-title>
-
-          <md-card-content>
-
-            <md-input-container class="md-block">
-              <label>Contact method</label>
-              <input type="text" ng-model="contact.contact_method">
-            </md-input-container>
-
-            <md-input-container class="md-block">
-              <label>Contact Text</label>
-              <input type="text" ng-model="contact.contact_text">
-            </md-input-container>
-
-            <md-input-container class="md-block">
-              <label>Comments</label>
-              <input type="text" ng-model="contact.comments">
-            </md-input-container>
-
-            <!--<md-datepicker ng-model="data.first_occurrence">
-            </md-datepicker>-->
-
-          </md-card-content>
-
-        </md-card>
-
-
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button type="submit" class="md-primary md-raised" ng-click="save(card)">Save</md-button>
-        </md-card-actions>
-
-      </md-card-content>
-
-    </md-card>
-  <div>
+    <div ng-repeat="card in cards" flex="100" flex-gt-sm="75" flex-gt-md="60">
+      <ng-include src="'/views/card-entity.html'"></ng-include>
+    </div>
+  </div>
 
 </md-content>
