@@ -139,36 +139,67 @@ app.controller('LoginController',
 
 
 app.controller('MainController',
-    ['$scope', '$location', 'Auth', '$firebaseArray',
-    function($scope, $location, Auth, $firebaseArray) {
+    ['$scope', '$location', 'Auth', '$firebaseArray', '$mdDialog',
+    function($scope, $location, Auth, $firebaseArray, $mdDialog) {
 
         var ref = firebase.database().ref();
         var cards = ref.child("cards");
         var query = cards.orderByChild("displayName");
 
-
-        $scope.updateDisplayName = function(card) {
-            var name = ''
-            name += card.firstName || '';
-            name += ' ';
-            name += card.lastName || '';
-            if (card.entityName != null && card.entityName.trim().length > 0) {
-                if (name.trim().length > 0) {
-                    name += ' (';
-                    name += card.entityName || '';
-                    name += ')';
-                } else {
-                    name = card.entityName;
-                }
-            }
-            card.displayName = name.trim();
-        };
+        // $scope.updateDisplayName = function(card) {
+        //     var name = ''
+        //     name += card.first_name || '';
+        //     name += ' ';
+        //     name += card.last_name || '';
+        //     if (card.entity_name != null && card.entity_name.trim().length > 0) {
+        //         if (name.trim().length > 0) {
+        //             name += ' (';
+        //             name += card.entity_name || '';
+        //             name += ')';
+        //         } else {
+        //             name = card.entity_name;
+        //         }
+        //     }
+        //     card.displayName = name.trim();
+        // };
 
         $scope.save = function(card) {
             list.$save(card).then(function(ref) {
                 console.log('Saved ' + ref);
             }, function(error) {
                 console.error('Error saving ' + ref + '\n' + error);
+            });
+        };
+
+        $scope.delete = function(evt, card, thing) {
+            var confirm = $mdDialog.confirm()
+                .title('Delete this card?')
+                .textContent('Data will be permanently deleted. Consider disabling instead.')
+                .ariaLabel('Delete confirmation')
+                .targetEvent(evt)
+                .ok('DELETE')
+                .cancel('Cancel');
+
+            $mdDialog.show(confirm).then(function() {
+                var found = false;
+                card.contacts.splice(card.contacts.indexOf(thing), 1);
+            }, function() {
+                // Canceled.
+            });
+        };
+
+        $scope.newEntity = function(card) {
+            cards.push().set({
+                'enabled': true
+            });
+        };
+
+        $scope.newContact = function(card) {
+            if (!card.contacts) {
+                card.contacts = [];
+            }
+            card.contacts.push({
+                'enabled': true
             });
         };
 
@@ -186,7 +217,7 @@ app.directive('myDisplayName', function() {
         scope: {
             card: '=myDisplayName'
         },
-        template: '<span>{{card.firstName}} {{card.lastName}}</span><b ng-show="!!card.entityName">({{card.entityName}})</b>'
+        template: '<span>{{card.first_name}} {{card.last_name}}</span><span flex ng-show="!!card.entity_name">({{card.entity_name}})</span>'
     };
 });
 

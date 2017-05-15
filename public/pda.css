@@ -37,3 +37,8 @@ md-card-title-text {
 .notes {
     font-family: monospace;
 }
+
+button.md-button md-icon{
+    /* Fix icon alignment. */
+    margin-top: -2px;
+}
