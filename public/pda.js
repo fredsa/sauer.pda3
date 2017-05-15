@@ -86,7 +86,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     $routeProvider
     .when('/login', {
         controller: 'LoginController',
-        templateUrl: '/views/login.html',
+        templateUrl: '/views/login-view.html',
         reloadOnSearch: false,
         resolve: {
             'currentAuth': ['Auth', function(Auth) {
@@ -97,7 +97,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     })
     .when('/', {
         controller: 'MainController',
-        templateUrl: '/views/main.html',
+        templateUrl: '/views/main-view.html',
         reloadOnSearch: false,
         resolve: {
             'currentAuth': ['Auth', function(Auth) {
@@ -145,23 +145,6 @@ app.controller('MainController',
         var ref = firebase.database().ref();
         var cards = ref.child("cards");
         var query = cards.orderByChild("displayName");
-
-        // $scope.updateDisplayName = function(card) {
-        //     var name = ''
-        //     name += card.first_name || '';
-        //     name += ' ';
-        //     name += card.last_name || '';
-        //     if (card.entity_name != null && card.entity_name.trim().length > 0) {
-        //         if (name.trim().length > 0) {
-        //             name += ' (';
-        //             name += card.entity_name || '';
-        //             name += ')';
-        //         } else {
-        //             name = card.entity_name;
-        //         }
-        //     }
-        //     card.displayName = name.trim();
-        // };
 
         $scope.save = function(card) {
             list.$save(card).then(function(ref) {
